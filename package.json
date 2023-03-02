@@ -1,0 +1,35 @@
+{
+  "name": "bongobiriyani",
+  "version": "1.0.0",
+  "description": "BongoBiriyani is eCommerce Food Delevery Website.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manassantra/BongoBiriyani.git"
+  },
+  "keywords": [
+    "yummy",
+    "biriyani",
+    "bongobiriyani",
+    "biriyanilove",
+    "healthyfood"
+  ],
+  "author": "contact.msfreelancing@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manassantra/BongoBiriyani/issues"
+  },
+  "homepage": "https://github.com/manassantra/BongoBiriyani#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "nodemon": "^2.0.21"
+  }
+}
