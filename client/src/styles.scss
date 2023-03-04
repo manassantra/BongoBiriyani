@@ -1,1 +1,81 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+$brand-font : 'Tangerine', serif;
+$body-font : 'Roboto Mono', serif;
+$head-font: 'Rancho', serif;
+
+.heading {
+    font-family: $head-font;
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+body {
+    background-color: #c4c4c4;
+    font-family: $body-font ;
+    font-size: 1.1rem;
+}
+
+.brand {
+    font-family: $brand-font;
+    font-size: 1.8rem;
+    font-weight: bold;
+
+    img {
+        height: 2.5rem;
+        border: 2px solid white;
+        border-radius: 55% 55%;
+        margin-right: 10px;
+        margin-top: -12px;
+    }
+}
+
+nav {
+    background: #753a88;
+    background: linear-gradient(150deg, #cc2b5e 0%, #753a88 98%);
+    .icon {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 10px;
+    }
+}
+
+
+.mt {
+    margin-top: 100px;
+    @media screen and (max-width: 380px) {
+        margin-top: 80px;
+    }
+}
+.carousel-item {
+    img {
+        height: 420px;
+        border-radius: 5px 5px;
+        @media screen and (max-width: 380px) {
+            border-radius: 2px 2px;
+            height: 200px;
+        }
+    }
+}
+
+.fa {
+    font-size: 1.2rem;
+}
+
+.carousel {
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: #753a88;
+    color: white;
+}
+.btn-primary:hover {
+    border: 1px solid #753a88;
+    background-color: transparent;
+    color: #753a88;
+}
+.product {
+    margin: 5px 5px;
+}

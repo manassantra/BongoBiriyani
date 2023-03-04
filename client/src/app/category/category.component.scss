@@ -1,0 +1,23 @@
+.d-flex {
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 380px) {
+        display: flex;
+        justify-content: start;
+        overflow-x: scroll;
+        overflow-y: hidden; 
+        scroll-behavior: smooth;
+    }
+}
+.card {
+    height: 150px !important;
+    width: 120px !important;
+    h5 {
+        text-align: center !important;
+    }
+
+    img {
+        height: 100px !important;
+        width: 120px !important;
+    }
+}

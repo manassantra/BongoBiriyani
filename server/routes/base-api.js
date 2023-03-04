@@ -1,5 +1,6 @@
 const express = require("express");
 const baseApiRoute = express();
+const authApi = require('../controllers/authController');
 
 
 // api responce
@@ -13,7 +14,7 @@ baseApiRoute.use('/response', (req, res)=>{
 });
 
 
-
+baseApiRoute.use('/user', authApi);
 
 
 
