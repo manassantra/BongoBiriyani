@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const apiServer = require('./server/routes/base-api');
+require('dotenv').config({path: './config/dev.env'});
+
 
 // App Config
 const app = express();
@@ -20,7 +22,7 @@ app.use(cors(corsList));
 
 // DB Config
 mongoose
-  .connect("mongodb://localhost:27017/bongobiriyani")
+  .connect(process.env.DATABASE_URL)
   .then((x) => {
     console.log(
       `Connected to : MongoDB-${x.connections[0].name}`
@@ -39,7 +41,7 @@ app.use("/api", apiServer);
 app.use('/', express.static(path.join(__dirname, 'client/dist/client')));
 
 // Server PORT
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log("App Server Listening on : http://localhost:" + port);
