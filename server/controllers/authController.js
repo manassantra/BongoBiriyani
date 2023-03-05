@@ -74,4 +74,15 @@ authCtrl.post('/login', async(req, res)=>{
 });
 
 
+authCtrl.get('/getOtp', async(req, res)=>{
+    var digits = "0123456789";
+    var otp_length = 4;
+    let OTP = "";
+        for (let i = 0; i < otp_length; i++) {
+          OTP += digits[Math.floor(Math.random() * 10)];
+        }
+    await res.status(200).send({"message": "Your Bongobiriyani Login OTP : " + `${OTP}` + "; It's Valid 5 min Only."});
+});
+
+
 module.exports = authCtrl;

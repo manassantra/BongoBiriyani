@@ -19,6 +19,6 @@ const verifyUserToken = (req, res, next) => {
     }
   };
 
-  jwtVerify.use(verifyUserToken);
+jwtVerify.use(verifyUserToken);
 
 module.exports = jwtVerify;
