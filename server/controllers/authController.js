@@ -8,7 +8,7 @@ require('dotenv').config({path: './config/dev.env'});
 
 
 // POST :: Create User
-authCtrl.post('/create', async(req, res)=>{
+authCtrl.post('/register', async(req, res)=>{
     let user = await User.findOne({mob: req.body.mob});
     if (!user) {
         let passwordSalt = bcrypt.genSaltSync(10);
