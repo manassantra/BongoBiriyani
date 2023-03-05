@@ -30,9 +30,23 @@ export class AuthService {
     this.currentUserSource.next(user);
   }
 
+  // Error 
+  handleError(error: HttpErrorResponse) {
+    let msg = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      msg = error.error.message;
+    } else {
+      // server-side error
+      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(msg);
+  }
+  
   // tslint:disable-next-line:typedef
   logout(){
-    localStorage.removeItem('bongoAuth');
-    this.currentUserSource.next(null);
+    localStorage.removeItem('bongAuth');
+    this.currentUserSource.next(this.user);
+    window.location.replace('');
   }
 }

@@ -21,10 +21,10 @@ export class AuthGuardGuard implements CanActivate {
       if (user.authToken && user.uId){
         this.notyf.success("Allready loggedin...");
         window.location.replace('');
-        return false;
-      } else 
-      this.notyf.error("Please Login to continioue...");
-      window.location.replace('/login');
-      return true;
+        return true;
+      } else {
+        this.notyf.error("Please Login to continioue...");
+        return true;
+      }
   }
 }

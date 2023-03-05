@@ -38,7 +38,8 @@ app.use("/api", apiServer);
 
 
 // Static directory path
-app.use('/', express.static(path.join(__dirname, 'client/dist/client')));
+app.use('/', express.static(path.join(__dirname, 'client/dist/client/')));
+app.use('*', express.static(path.join(__dirname, 'client/dist/')));
 
 // Server PORT
 const port = process.env.PORT;
