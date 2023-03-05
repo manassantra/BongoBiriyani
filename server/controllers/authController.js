@@ -66,10 +66,10 @@ authCtrl.post('/login', async(req, res)=>{
                 uId: user.uId
               });
         } else {
-            res.status(209).send({"error": "Wrong Password !"})
+            res.status(409).send("Wrong Password !")
         }
     } else {
-        res.status(409).send("Did not find any registered-user with this Email-Id / Mobile-Number.");
+        res.status(409).send("Account doesn't exist !");
     }
 });
 

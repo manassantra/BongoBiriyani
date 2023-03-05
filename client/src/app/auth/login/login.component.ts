@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authSrvc.login(this.model).subscribe(res=>{
+    this.authSrvc.login(this.model).subscribe((res)=>{
       this.notyf.success("Login Successful !")
       window.location.replace('');
     }, err => {

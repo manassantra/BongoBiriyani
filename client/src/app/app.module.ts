@@ -12,6 +12,10 @@ import { ProductsComponent } from './products/products.component';
 import { LoginComponent } from './auth/login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartComponent } from './cart/cart.component';
+import { AccountComponent } from './account/account.component';
+import { AddressComponent } from './address/address.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductsComponent,
     LoginComponent,
     MenuComponent,
+    CartComponent,
+    AccountComponent,
+    AddressComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
