@@ -1,8 +1,10 @@
 const express = require("express");
 const authCtrl = express();
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const cryp = require('crypto');
+require('dotenv').config({path: './config/dev.env'});
 
 
 // POST :: Create User
@@ -10,7 +12,7 @@ authCtrl.post('/create', async(req, res)=>{
     let user = await User.findOne({mob: req.body.mob});
     if (!user) {
         let passwordSalt = bcrypt.genSaltSync(10);
-        let passwordHash = bcrypt.hashSync("B4c0/\/", passwordSalt);
+        let passwordHash = bcrypt.hashSync(req.body.password, passwordSalt);
         let usr = new User({
             uId: cryp.randomBytes(16).toString("hex"),
             fullName: req.body.fullName,
@@ -32,17 +34,44 @@ authCtrl.post('/create', async(req, res)=>{
     else {
         res.status(200).send({"alert": "User already exist with this Mobile Number !"});
     }
-})
+});
 
+// POST :: Login
+authCtrl.post('/login', async(req, res)=>{
+    let user;
+    if (isNaN(parseInt(req.body.username))) {
+        // if email
+        user = await User.findOne({email: req.body.username});
+    } else if (!isNaN(parseInt(req.body.username))) {
+        // if mobile
+        user = await User.findOne({mob: req.body.username});
+    }
 
-
-
-
-
-
-
-
-
+    if(user) {
+        let Pass = req.body.password; 
+        let storedPass = user.password; 
+        const passwordMatch = await bcrypt.compare(Pass, storedPass);
+        // console.log(secret.configuration);
+        if (passwordMatch) {
+            const token = jwt.sign(
+                { _id: user.uId },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+              );
+              res.status(200).send({
+                user: user.fullName,
+                authToken: token,
+                expiresIn: 12 * 60 * 60,
+                auth: true,
+                uId: user.uId
+              });
+        } else {
+            res.status(209).send({"error": "Wrong Password !"})
+        }
+    } else {
+        res.status(409).send("Did not find any registered-user with this Email-Id / Mobile-Number.");
+    }
+});
 
 
 module.exports = authCtrl;
