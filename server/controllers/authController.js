@@ -3,6 +3,7 @@ const authCtrl = express();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Admin = require('../models/admin');
 const cryp = require('crypto');
 require('dotenv').config({path: './config/dev.env'});
 
@@ -19,6 +20,7 @@ authCtrl.post('/register', async(req, res)=>{
             email: req.body.email,
             mob: req.body.mob,
             dob: req.body.dob,
+            accessType: "USER-RXX",
             gender: req.body.gender,
             password: passwordHash,
             isVerified: true
@@ -73,7 +75,7 @@ authCtrl.post('/login', async(req, res)=>{
     }
 });
 
-
+// GET :: Generate OTP
 authCtrl.get('/getOtp', async(req, res)=>{
     var digits = "0123456789";
     var otp_length = 4;
@@ -82,6 +84,37 @@ authCtrl.get('/getOtp', async(req, res)=>{
           OTP += digits[Math.floor(Math.random() * 10)];
         }
     await res.status(200).send({"message": "Your Bongobiriyani Login OTP : " + `${OTP}` + "; It's Valid 5 min Only."});
+});
+
+// POST :: Create Admin
+authCtrl.post('/admin/signup', async(req, res)=>{
+    let admin = await Admin.findOne({mob: req.body.mob});
+    if (!admin) {
+        let passwordSalt = bcrypt.genSaltSync(10);
+        let passwordHash = bcrypt.hashSync(req.body.password, passwordSalt);
+        let adm = new Admin({
+            admId: cryp.randomBytes(16).toString("hex"),
+            fullName: req.body.fullName,
+            email: req.body.email,
+            mob: req.body.mob,
+            dob: req.body.dob,
+            accessType: "ADM-RWM",
+            govUid: req.body.govUid,
+            gender: req.body.gender,
+            password: passwordHash,
+            isVerified: true
+        });
+
+        const result = await adm.save();
+        if (!result) {
+            res.status(202).send({"error": "There is an Error. \n Please try again !"});
+        } else {
+            res.status(200).send({"message": "Admin Created Successfully !", "data": result});
+        }
+    }
+    else {
+        res.status(200).send({"alert": "Admin already exist with this Mobile Number !"});
+    }
 });
 
 

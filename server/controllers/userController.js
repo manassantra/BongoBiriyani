@@ -7,7 +7,8 @@ const User = require('../models/user');
 userCtrl.get('/:id', async(req, res)=>{
     const user = await User.findOne({uId: req.params.id});
     if (user) {
-        user.password = "********";
+        user.password = "**Encrypted Password**";
+        user.accessType = "**Can't View as User**"
         res.status(200).send(user);
     } else {
         res.status(202).send({"alert": "Didn't find any user."});

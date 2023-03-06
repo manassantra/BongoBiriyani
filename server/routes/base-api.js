@@ -2,7 +2,8 @@ const express = require("express");
 const baseApiRoute = express();
 const authApi = require('../controllers/authController');
 const userApi = require('../controllers/userController');
-const jwtVerify = require('../middleware/jwtVerify');
+const adminApi = require('../controllers/adminController');
+const jwtVerifyUser = require('../middleware/jwtVerifyUser');
 
 
 // api responce
@@ -16,7 +17,8 @@ baseApiRoute.use('/response', (req, res)=>{
 });
 
 baseApiRoute.use('/auth', authApi);
-baseApiRoute.use('/user', jwtVerify, userApi);
+// baseApiRoute.use('/admin', adminApi);
+baseApiRoute.use('/user', jwtVerifyUser, userApi);
 
 
 
