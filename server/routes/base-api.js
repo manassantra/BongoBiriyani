@@ -1,6 +1,11 @@
 const express = require("express");
 const baseApiRoute = express();
 const authApi = require('../controllers/authController');
+const userApi = require('../controllers/userController');
+const adminApi = require('../controllers/adminController');
+const productApi = require('../controllers/productController');
+const jwtVerifyUser = require('../middleware/jwtVerifyUser');
+const jwtVerifyAdmin = require('../middleware/jwtVerifyAdmin');
 
 
 // api responce
@@ -13,10 +18,10 @@ baseApiRoute.use('/response', (req, res)=>{
     });
 });
 
-
-baseApiRoute.use('/user', authApi);
-
-
+baseApiRoute.use('/auth', authApi);
+baseApiRoute.use('/admin', adminApi);
+baseApiRoute.use('/user', jwtVerifyUser, userApi);
+baseApiRoute.use('/product', jwtVerifyAdmin, productApi);
 
 
 
