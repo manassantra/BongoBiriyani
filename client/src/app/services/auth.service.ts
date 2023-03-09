@@ -13,7 +13,7 @@ export class AuthService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
   apiurl = "http://localhost:8080/api/";
-  user: any = JSON.parse(localStorage.getItem('user') || '{}');
+  user: any = JSON.parse(localStorage.getItem('bongAuth') || '{}');
   notyf = new Notyf();
   constructor(private http: HttpClient) { }
 
