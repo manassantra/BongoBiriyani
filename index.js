@@ -37,9 +37,6 @@ mongoose
 app.use("/api", apiServer);
 
 
-// Static directory path
-app.use('/', express.static(path.join(__dirname, 'client/dist/client')));
-
 // Server PORT
 const port = process.env.PORT;
 
@@ -47,9 +44,4 @@ app.listen(port, () => {
   console.log("App Server Listening on : http://localhost:" + port);
 });
 
-// Client App Dir
-app.get("*", (req, res) => {
-    res.sendFile(
-      path.join(__dirname, "dist/<dir_name>/index.html")
-    );
-});
+

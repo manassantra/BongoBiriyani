@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +11,12 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductsComponent } from './products/products.component';
+import { LoginComponent } from './auth/login/login.component';
+import { MenuComponent } from './menu/menu.component';
+import { CartComponent } from './cart/cart.component';
+import { AccountComponent } from './account/account.component';
+import { AddressComponent } from './address/address.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +26,20 @@ import { ProductsComponent } from './products/products.component';
     CarouselComponent,
     HomeComponent,
     CategoryComponent,
-    ProductsComponent
+    ProductsComponent,
+    LoginComponent,
+    MenuComponent,
+    CartComponent,
+    AccountComponent,
+    AddressComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
