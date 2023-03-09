@@ -20,7 +20,7 @@ authCtrl.post('/register', async(req, res)=>{
             email: req.body.email,
             mob: req.body.mob,
             dob: req.body.dob,
-            accessType: "USER-RXX",
+            accessType: "USER-ReadOnly",
             gender: req.body.gender,
             password: passwordHash,
             isVerified: true
@@ -98,7 +98,7 @@ authCtrl.post('/admin/signup', async(req, res)=>{
             email: req.body.email,
             mob: req.body.mob,
             dob: req.body.dob,
-            accessType: "ADM-RWM",
+            accessType: "ADM-ReadWrite",
             govUid: req.body.govUid,
             gender: req.body.gender,
             password: passwordHash,
@@ -114,6 +114,43 @@ authCtrl.post('/admin/signup', async(req, res)=>{
     }
     else {
         res.status(200).send({"alert": "Admin already exist with this Mobile Number !"});
+    }
+});
+
+// POST :: Login
+authCtrl.post('/admin/login', async(req, res)=>{
+    let admin;
+    if (isNaN(parseInt(req.body.username))) {
+        // if email
+        admin = await Admin.findOne({email: req.body.username});
+    } else if (!isNaN(parseInt(req.body.username))) {
+        // if mobile
+        admin = await Admin.findOne({mob: req.body.username});
+    }
+
+    if(admin && admin.isVerified == true) {
+        let Pass = req.body.password; 
+        let storedPass = admin.password; 
+        const passwordMatch = await bcrypt.compare(Pass, storedPass);
+        // console.log(secret.configuration);
+        if (passwordMatch) {
+            const token = jwt.sign(
+                { _id: admin.admId },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+              );
+              res.status(200).send({
+                adm: admin.fullName,
+                admAuthToken: token,
+                expiresIn: 12 * 60 * 60,
+                auth: true,
+                admId: admin.admId
+              });
+        } else {
+            res.status(409).send("Wrong Password !")
+        }
+    } else {
+        res.status(409).send("Account doesn't exist / In-Active !");
     }
 });
 

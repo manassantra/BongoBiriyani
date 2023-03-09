@@ -1,8 +1,8 @@
 const express = require("express");
-const jwtVerifyUser = express();
+const jwtVerifyAdmin = express();
 const jwt = require("jsonwebtoken");
 
-const verifyUserToken = async(req, res, next) => {
+const verifyAdminToken = async(req, res, next) => {
     if (!req.headers.authorization) {
       return res.status(401).send("Unauthorized Access");
     }
@@ -12,13 +12,13 @@ const verifyUserToken = async(req, res, next) => {
     }
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded.user;
+        req.admin = decoded.admin;
         next();
     } catch (err) {
       res.status(400).send("Invalid token.");
     }
   };
 
-jwtVerifyUser.use(verifyUserToken);
+  jwtVerifyAdmin.use(verifyAdminToken);
 
-module.exports = jwtVerifyUser;
+module.exports = jwtVerifyAdmin;

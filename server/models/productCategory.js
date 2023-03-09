@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const prdCatSchema = new mongoose.Schema({
+const prdCatSchema = mongoose.Schema({
   productCatId: {type: String},
-  categoryName: {type: String, required : true},
-  descriptions: {typr: String},
-  imgUrl: {typr: String},
+  categoryName: {type: String},
+  descriptions: {type: String},
+  imgUrl: {type: String},
   isActive: {type: Boolean}
 })
 
