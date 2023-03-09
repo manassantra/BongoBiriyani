@@ -11,6 +11,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent, canActivate: [AuthGuardGuard]},
   {path:'menu', component: MenuComponent },
   {path:'cart', component: CartComponent },
+  {path: '**', redirectTo: '', canActivate: [AuthGuardGuard]}
 ];
 
 @NgModule({
