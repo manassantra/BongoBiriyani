@@ -4,6 +4,7 @@ const authApi = require('../controllers/authController');
 const userApi = require('../controllers/userController');
 const adminApi = require('../controllers/adminController');
 const productApi = require('../controllers/productController');
+const productSettingsApi = require('../controllers/productSettingsController');
 const jwtVerifyUser = require('../middleware/jwtVerifyUser');
 const jwtVerifyAdmin = require('../middleware/jwtVerifyAdmin');
 
@@ -18,10 +19,17 @@ baseApiRoute.use('/response', (req, res)=>{
     });
 });
 
+// [Common Auth]
 baseApiRoute.use('/auth', authApi);
-baseApiRoute.use('/admin', adminApi);
-baseApiRoute.use('/user', jwtVerifyUser, userApi);
+
+// [Admin Users]
+baseApiRoute.use('/admin', jwtVerifyAdmin , adminApi);
 baseApiRoute.use('/product', jwtVerifyAdmin, productApi);
+baseApiRoute.use('/productsettings', jwtVerifyAdmin, productSettingsApi);
+
+// [Client Users]
+baseApiRoute.use('/user', jwtVerifyUser, userApi);
+
 
 
 

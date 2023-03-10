@@ -63,7 +63,7 @@ authCtrl.post('/login', async(req, res)=>{
               res.status(200).send({
                 user: user.fullName,
                 authToken: token,
-                expiresIn: 12 * 60 * 60,
+                expiresIn: 24 * 60 * 60,
                 auth: true,
                 uId: user.uId
               });
@@ -142,7 +142,7 @@ authCtrl.post('/admin/login', async(req, res)=>{
               res.status(200).send({
                 adm: admin.fullName,
                 admAuthToken: token,
-                expiresIn: 12 * 60 * 60,
+                expiresIn: 24 * 60 * 60,
                 auth: true,
                 admId: admin.admId
               });

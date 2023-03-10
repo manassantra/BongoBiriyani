@@ -10861,7 +10861,8 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background: url("https://www.logolynx.com/images/logolynx/18/186056e89f0f92c07b026966bccb6e0c.png");
+  width: 50%;
   background-position: center;
   background-size: cover;
 }

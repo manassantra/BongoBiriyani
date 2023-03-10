@@ -1,11 +1,17 @@
 const express = require("express");
 const adminCtrl = express();
-const bcrypt = require('bcrypt');
 const Admin = require('../models/admin');
-const cryp = require('crypto');
-require('dotenv').config({path: './config/dev.env'});
 
 
+// GET/:Id  ::: Get Admin Details
+adminCtrl.get("/:id", async(req, res)=>{
+    let adm = await Admin.findOne({admId: req.params.id});
+    if (adm) {
+        res.status(200).send(adm);
+    } else {
+        res.status(209).send({"error": "Error !"})
+    }
+});
 
 
 module.exports =adminCtrl;
