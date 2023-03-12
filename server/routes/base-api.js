@@ -24,7 +24,7 @@ baseApiRoute.use('/auth', authApi);
 
 // [Admin Users]
 baseApiRoute.use('/admin', jwtVerifyAdmin , adminApi);
-baseApiRoute.use('/product', jwtVerifyAdmin, productApi);
+baseApiRoute.use('/product', productApi);
 baseApiRoute.use('/productsettings', jwtVerifyAdmin, productSettingsApi);
 
 // [Client Users]

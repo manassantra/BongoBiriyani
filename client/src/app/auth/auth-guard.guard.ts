@@ -22,14 +22,13 @@ export class AuthGuardGuard implements CanActivate {
       var url = route.url.toString();
       if (user.authToken && user.uId){
         if(url == 'login') {
-          this.notyf.success("All-ready loggedin...");
+          this.notyf.success("Already loggedin...");
           this.router.navigate(['']);
           return false;
         }
         return true;
       } else {
         if(url != 'login') {
-          this.notyf.error("Please Login to continioue...");
           this.router.navigate(['/login']);
           return true;
         }

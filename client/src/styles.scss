@@ -44,7 +44,7 @@ nav {
 
 .mt {
     margin-top: 100px;
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 360px) {
         margin-top: 80px;
     }
 }
@@ -52,9 +52,9 @@ nav {
     img {
         height: 420px;
         border-radius: 5px 5px;
-        @media screen and (max-width: 380px) {
+        @media screen and (max-width: 360px) {
             border-radius: 2px 2px;
-            height: 200px;
+            height: 180px;
         }
     }
 }
@@ -75,8 +75,4 @@ nav {
     border: 1px solid #753a88;
     background-color: transparent;
     color: #753a88;
-}
-
-.product {
-    margin: 5px 0px;
 }

@@ -20,14 +20,13 @@ export class AuthGuard implements CanActivate {
       var url = route.url.toString();
       if (admin.admAuthToken && admin.admId){
         if(url == 'login') {
-          this.notyf.success("All-ready loggedin...");
+          this.notyf.success("Already loggedin...");
           this.router.navigate(['']);
           return false;
         }
         return true;
       } else {
         if(url != 'login') {
-          this.notyf.error("Please Login to continioue...");
           this.router.navigate(['/login']);
           return true;
         }

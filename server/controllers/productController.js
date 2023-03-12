@@ -2,10 +2,12 @@ const express = require("express");
 const productCtrl = express();
 const Product = require('../models/product');
 const cryp = require('crypto');
+const jwtVerifyUser = require('../middleware/jwtVerifyUser');
+const jwtVerifyAdmin = require('../middleware/jwtVerifyAdmin');
 
 
 // POST :: Create Product [Admin Access Only]
-productCtrl.post('/create', async (req, res)=>{
+productCtrl.post('/create', jwtVerifyAdmin, async (req, res)=>{
     let product = new Product({
         pId: cryp.randomBytes(8).toString("hex"),
         productName: req.body.productName,
