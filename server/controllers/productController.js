@@ -1,31 +1,9 @@
 const express = require("express");
 const productCtrl = express();
 const Product = require('../models/product');
-const cryp = require('crypto');
-const jwtVerifyUser = require('../middleware/jwtVerifyUser');
-const jwtVerifyAdmin = require('../middleware/jwtVerifyAdmin');
+const ProductCategory = require('../models/productCategory');
+const ProductSubcategory = require('../models/productSubcategory');
 
-
-// POST :: Create Product [Admin Access Only]
-productCtrl.post('/create', jwtVerifyAdmin, async (req, res)=>{
-    let product = new Product({
-        pId: cryp.randomBytes(8).toString("hex"),
-        productName: req.body.productName,
-        productCat: req.body.productCat,
-        productSubcat: req.body.productSubcat,
-        descriptions: req.body.descriptions,
-        imgUrl: req.body.imgUrl,
-        price: req.body.price,
-        inStock: true,
-        isActive: true
-    })
-    try {
-        let response = await product.save();
-        res.status(200).send(response);
-    } catch(err) {
-        res.status(202).send({"error": err});
-    }
-});
 
 // GET :: Get list of all product
 productCtrl.get('/all', async(req, res)=>{
@@ -36,6 +14,26 @@ productCtrl.get('/all', async(req, res)=>{
         res.status(202).send({"error": "Error ! Try again later !"});
     } else {
         res.status(200).send(product);
+    }
+});
+
+// GET :: Get Category List
+productCtrl.get('/categorylist', async(req, res)=>{
+    let categoryList = await ProductCategory.find();
+    if(categoryList.length > 0) {
+        res.status(200).send(categoryList);
+    } else {
+        res.status(202).send({"alert": "No Data Available"});
+    }
+});
+
+// GET :: Get SubCategory List
+productCtrl.get('/subcategorylist', async(req, res)=>{
+    let subCatList = await ProductSubcategory.find();
+    if(subCatList.length > 0) {
+        res.status(200).send(subCatList);
+    } else {
+        res.status(202).send({"alert": "No Data Available"});
     }
 });
 

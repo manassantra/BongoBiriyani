@@ -5,6 +5,27 @@ const ProductCategory = require('../models/productCategory');
 const ProductSubcategory = require('../models/productSubcategory');
 
 
+// POST :: Create Product [Admin Access Only]
+productSettingsCtrl.post('/product/create', async (req, res)=>{
+    let product = new Product({
+        pId: cryp.randomBytes(8).toString("hex"),
+        productName: req.body.productName,
+        productCat: req.body.productCat,
+        productSubcat: req.body.productSubcat,
+        descriptions: req.body.descriptions,
+        imgUrl: req.body.imgUrl,
+        price: req.body.price,
+        inStock: true,
+        isActive: true
+    })
+    try {
+        let response = await product.save();
+        res.status(200).send(response);
+    } catch(err) {
+        res.status(202).send({"error": err});
+    }
+});
+
 // POST :: Create Category
 productSettingsCtrl.post('/category/create', async(req, res)=>{
     const cat = await ProductCategory.findOne({categoryName: req.body.categoryName});
